@@ -1,4 +1,4 @@
-// TODO: fix click-when-transition-still-running-bug; make cards "turn" again when not matched; add timer; add star rating logic; style winning modal; update README;
+// TODO: add timer; add star rating logic; style winning modal; update README;
 
 // To enhance game with more cards just add icons to this array, per icon 2 cards will be added!
 const icons = ['diamond', 'anchor', 'bolt', 'bomb', 'leaf', 'bicycle', 'paper-plane-o', 'cube'];
@@ -13,8 +13,7 @@ icons.forEach(function(icon) {
 let container = document.querySelector('.container');
 let moveCounterElement = document.querySelector('.moves');
 let matchCounter = 0;
-let firstClickedCardElement = null;
-let secondClickedCardElement = null;
+let clickedCardElements = null;
 
 // Start a new game at page load
 newGame();
@@ -30,8 +29,7 @@ function newGame() {
 
   moveCounterElement.textContent = 0;
   matchCounter = 0;
-  firstClickedCardElement = null;
-  secondClickedCardElement = null;
+  clickedCardElements = [];
 
   let newDeckElement = document.createElement('ul');
   newDeckElement.className = 'deck';
@@ -84,25 +82,31 @@ function onCardClicked(cardElement) {
 }
 
 function onCardOpened(cardElement) {
-  if(firstClickedCardElement == null) {
-      firstClickedCardElement = cardElement;
-  } else {
-    secondClickedCardElement = cardElement;
+  let cardPair = clickedCardElements[clickedCardElements.length-1];
+
+  if(cardPair != null && cardPair.length === 1) {
+    // One card was opened already, add the newly clicked card and compare them for match
+    cardPair[1] = cardElement;
+    clickedCardElements[clickedCardElements.length-1] = cardPair;
 
     incrementMoveCounter();
 
     delayFunctionCall(function() {
-      firstClickedCardElement.firstElementChild.className === secondClickedCardElement.firstElementChild.className
-        ? onCardsMatched() : onCardsNotMatched();
+      cardPair[0].firstElementChild.className === cardPair[1].firstElementChild.className ? onCardsMatched() : onCardsNotMatched();
     });
+  }
+  else {
+    // There is no card to check for match, so just store it
+    let newCardPair = [];
+    newCardPair.push(cardElement);
+    clickedCardElements.push(newCardPair);
   }
 }
 
 function onCardsMatched() {
-  firstClickedCardElement.classList.add('match');
-  secondClickedCardElement.classList.add('match');
-
-  clearClickedCardElements();
+  let cardPair = clickedCardElements.shift();
+  cardPair[0].classList.add('match');
+  cardPair[1].classList.add('match');
 
   matchCounter ++;
 
@@ -112,17 +116,17 @@ function onCardsMatched() {
 }
 
 function onCardsNotMatched() {
-  firstClickedCardElement.classList.add('no-match');
-  secondClickedCardElement.classList.add('no-match');
+  clickedCardElements[0][0].classList.add('no-match');
+  clickedCardElements[0][1].classList.add('no-match');
 
   delayFunctionCall(function() {
-    firstClickedCardElement.classList.remove('no-match');
-    secondClickedCardElement.classList.remove('no-match');
+    let cardPair = clickedCardElements.shift();
 
-    firstClickedCardElement.classList.remove('open');
-    secondClickedCardElement.classList.remove('open');
+    cardPair[0].classList.remove('no-match');
+    cardPair[1].classList.remove('no-match');
 
-    clearClickedCardElements();
+    cardPair[0].classList.remove('open');
+    cardPair[1].classList.remove('open');
   });
 }
 
@@ -137,21 +141,3 @@ function onAllCardsMatched() {
 function delayFunctionCall(func) {
   setTimeout(func, 500);
 }
-
-function clearClickedCardElements() {
-  firstClickedCardElement = null;
-  secondClickedCardElement = null;
-}
-
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
