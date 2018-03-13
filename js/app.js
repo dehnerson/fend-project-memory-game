@@ -1,3 +1,5 @@
+// TODO: fix click-when-transition-still-running-bug; make cards "turn" again when not matched; add timer; add star rating logic; style winning modal; update README;
+
 // To enhance game with more cards just add icons to this array, per icon 2 cards will be added!
 const icons = ['diamond', 'anchor', 'bolt', 'bomb', 'leaf', 'bicycle', 'paper-plane-o', 'cube'];
 const cards = [];
