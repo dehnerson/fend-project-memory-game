@@ -11,7 +11,7 @@ icons.forEach(function(icon) {
 });
 
 let container = document.querySelector('.container');
-let moveCounterElement = document.querySelector('.moves');
+let moveCounterElement = document.querySelector('.moves-counter');
 let moveCounterDescrElement = document.querySelector('.moves-descr');
 let timerMinElement = document.querySelector('.timer-minutes');
 let timerSecElement = document.querySelector('.timer-seconds');
