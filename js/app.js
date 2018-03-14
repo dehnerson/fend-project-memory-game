@@ -1,4 +1,4 @@
-// TODO: add timer; add star rating logic; style winning modal; update README;
+// TODO:add star rating logic; style winning modal; update README;
 
 // To enhance game with more cards just add icons to this array, per icon 2 cards will be added!
 const icons = ['diamond', 'anchor', 'bolt', 'bomb', 'leaf', 'bicycle', 'paper-plane-o', 'cube'];
@@ -12,6 +12,10 @@ icons.forEach(function(icon) {
 
 let container = document.querySelector('.container');
 let moveCounterElement = document.querySelector('.moves');
+let moveCounterDescrElement = document.querySelector('.moves-descr');
+let timerMinElement = document.querySelector('.timer-minutes');
+let timerSecElement = document.querySelector('.timer-seconds');
+let timerInterval = null;
 let matchCounter = 0;
 let clickedCardElements = null;
 
@@ -25,9 +29,12 @@ document.querySelector('.restart').addEventListener('click', function(event) {
 
 
 function newGame() {
-  shuffle(cards);
+  //shuffle(cards);
 
-  moveCounterElement.textContent = 0;
+  clearTimer();
+  resetMoveCounter();
+  timerMinElement.textContent = '00';
+  timerSecElement.textContent = '00';
   matchCounter = 0;
   clickedCardElements = [];
 
@@ -54,9 +61,34 @@ function newGame() {
 
   newDeckElement.addEventListener('click', function(event) {
     if (event.target.nodeName === 'LI') {
+      startTimer();
+
       onCardClicked(event.target);
     }
   });
+}
+
+function startTimer() {
+  if(timerInterval == null) {
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+}
+
+function updateTimer() {
+  if(parseInt(timerSecElement.textContent) === 59) {
+    timerSecElement.textContent = '00';
+    timerMinElement.textContent = ('0' + (parseInt(timerMinElement.textContent) + 1)).slice(-2);
+  }
+  else {
+    timerSecElement.textContent = ('0' + (parseInt(timerSecElement.textContent) + 1)).slice(-2);
+  }
+}
+
+function clearTimer() {
+  if(timerInterval != null) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -111,6 +143,8 @@ function onCardsMatched() {
   matchCounter ++;
 
   if(matchCounter === icons.length) {
+    clearTimer();
+
     delayFunctionCall(onAllCardsMatched);
   }
 }
@@ -132,6 +166,12 @@ function onCardsNotMatched() {
 
 function incrementMoveCounter() {
   moveCounterElement.textContent = parseInt(moveCounterElement.textContent) + 1;
+  moveCounterElement.textContent == '1' ? moveCounterDescrElement.textContent = 'Move' : moveCounterDescrElement.textContent = 'Moves';
+}
+
+function resetMoveCounter() {
+  moveCounterElement.textContent = 0;
+  moveCounterDescrElement.textContent = 'Moves';
 }
 
 function onAllCardsMatched() {
