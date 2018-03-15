@@ -149,6 +149,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .modal-container h3 {
@@ -188,5 +189,11 @@ h1 {
   .deck .card {
     width: 122px;
     height: 122px;
+  }
+}
+
+@media only screen and (min-width: 830px) {
+  .modal-container {
+    width: 700px;
   }
 }
