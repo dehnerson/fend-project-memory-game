@@ -74,8 +74,6 @@ function newGame() {
 
   newDeckElement.addEventListener('click', function(event) {
     if (event.target.nodeName === 'LI') {
-      startTimer();
-
       onCardClicked(event.target);
     }
   });
@@ -121,6 +119,7 @@ function shuffle(array) {
 
 function onCardClicked(cardElement) {
   if(!cardElement.classList.contains('open')) {
+    startTimer();
     cardElement.classList.add('open');
     onCardOpened(event.target);
   }
