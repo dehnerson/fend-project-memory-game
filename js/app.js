@@ -40,7 +40,7 @@ winningModalElement.addEventListener('click', function(event) {
 
 
 function newGame() {
-  // shuffle(cards);
+  shuffle(cards);
 
   clearTimer();
   resetMoveCounter();
