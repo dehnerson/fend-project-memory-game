@@ -187,7 +187,7 @@ function incrementMoveCounter() {
   moveCounterElement.textContent = moves;
   moves === 1 ? moveCounterDescrElement.textContent = 'Move' : moveCounterDescrElement.textContent = 'Moves';
 
-  if(moves === 12 || moves === 20) {
+  if(moves === 18 || moves === 28) {
     hideStar();
   }
 }
