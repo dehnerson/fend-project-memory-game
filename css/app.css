@@ -158,6 +158,10 @@ h1 {
   cursor: pointer;
 }
 
+.score-panel .restart:hover {
+  color: grey;
+}
+
 .hidden {
   font-size: 0;
   transition: 0.4s;
