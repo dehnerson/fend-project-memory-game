@@ -9,25 +9,38 @@ icons.forEach(function(icon) {
 });
 
 let container = document.querySelector('.container');
-let moveCounterElement = document.querySelector('.moves-counter');
-let moveCounterDescrElement = document.querySelector('.moves-descr');
-let timerMinElement = document.querySelector('.timer-minutes');
-let timerSecElement = document.querySelector('.timer-seconds');
+let moveCounterElement = document.querySelector('.score-panel .moves-counter');
+let moveCounterDescrElement = document.querySelector('.score-panel .moves-descr');
+let starsElement = document.querySelector('.score-panel .stars');
+let timerMinElement = document.querySelector('.score-panel .timer-minutes');
+let timerSecElement = document.querySelector('.score-panel .timer-seconds');
 let timerInterval = null;
 let matchCounter = 0;
 let clickedCardElements = null;
+let winningModalElement = document.querySelector('.modal');
+let modalTimeMinElement = document.querySelector('.modal .timer-minutes');
+let modalTimeSecElement = document.querySelector('.modal .timer-seconds');
+let modalCounterElement = document.querySelector('.modal .moves-counter');
+let modalCounterDescrElement = document.querySelector('.modal .moves-descr');
+let modalStarsElement = document.querySelector('.modal .stars');
 
 // Start a new game at page load
 newGame();
 
-document.querySelector('.restart').addEventListener('click', function(event) {
-  newGame();
+document.querySelectorAll('.restart').forEach(function(each) {
+  each.addEventListener('click', function(event) {
+    newGame();
+  });
+});
+
+winningModalElement.addEventListener('click', function(event) {
+  winningModalElement.style.display = 'none';
 });
 
 
 
 function newGame() {
-  //shuffle(cards);
+  // shuffle(cards);
 
   clearTimer();
   resetMoveCounter();
@@ -185,14 +198,15 @@ function resetMoveCounter() {
 }
 
 function hideStar() {
-  let star = document.querySelector('.stars li :not(.hidden)');
+  let star = starsElement.querySelector('li :not(.hidden)');
+
   if(star != null) {
     star.classList.add('hidden');
   }
 }
 
 function showHiddenStars() {
-  let hiddenStars = document.querySelectorAll('.stars li .hidden');
+  let hiddenStars = starsElement.querySelectorAll('li .hidden');
 
   if(hiddenStars != null) {
     hiddenStars.forEach(function(each) {
@@ -202,7 +216,24 @@ function showHiddenStars() {
 }
 
 function onAllCardsMatched() {
-  alert('You WIN!');
+  modalTimeMinElement.textContent = timerMinElement.textContent;
+  modalTimeSecElement.textContent = timerSecElement.textContent;
+
+  modalCounterElement.textContent = moveCounterElement.textContent;
+  modalCounterDescrElement.textContent = moveCounterDescrElement.textContent;
+
+  let hiddenStarsLength = starsElement.querySelectorAll('li .hidden').length;
+
+  for(let i=0; i<modalStarsElement.children.length; i++) {
+    if(i<hiddenStarsLength) {
+      modalStarsElement.children[i].classList.add('hidden');
+    }
+    else {
+      modalStarsElement.children[i].classList.remove('hidden');
+    }
+  }
+
+  winningModalElement.style.display = 'block';
 }
 
 function delayFunctionCall(func) {
