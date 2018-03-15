@@ -157,3 +157,8 @@ h1 {
 .score-panel .restart {
   cursor: pointer;
 }
+
+.hidden {
+  font-size: 0;
+  transition: 0.4s;
+}

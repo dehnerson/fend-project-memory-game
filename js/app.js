@@ -165,13 +165,26 @@ function onCardsNotMatched() {
 }
 
 function incrementMoveCounter() {
-  moveCounterElement.textContent = parseInt(moveCounterElement.textContent) + 1;
-  moveCounterElement.textContent == '1' ? moveCounterDescrElement.textContent = 'Move' : moveCounterDescrElement.textContent = 'Moves';
+  let moves = parseInt(moveCounterElement.textContent) + 1;
+
+  moveCounterElement.textContent = moves;
+  moves === 1 ? moveCounterDescrElement.textContent = 'Move' : moveCounterDescrElement.textContent = 'Moves';
+
+  if(moves === 12 || moves === 20) {
+    hideStar();
+  }
 }
 
 function resetMoveCounter() {
   moveCounterElement.textContent = 0;
   moveCounterDescrElement.textContent = 'Moves';
+}
+
+function hideStar() {
+  let star = document.querySelector('.stars li :not(.hidden)');
+  if(star != null) {
+    star.classList.add('hidden');
+  }
 }
 
 function onAllCardsMatched() {
