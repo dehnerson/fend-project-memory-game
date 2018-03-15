@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 750px;
   display: flex;
   margin: auto;
   align-items: center;
@@ -28,6 +28,7 @@ h1 {
  */
 
 .deck {
+  max-width: 100%;
   background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
   border-radius: 10px;
   box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -62,28 +63,28 @@ h1 {
   }
 }
 
-@media only screen and (min-width: 410px) {
+@media only screen and (min-width: 380px) {
   .deck .card {
     width: 74px;
     height: 74px;
   }
 }
 
-@media only screen and (min-width: 490px) {
+@media only screen and (min-width: 460px) {
   .deck .card {
     width: 86px;
     height: 86px;
   }
 }
 
-@media only screen and (min-width: 570px) {
+@media only screen and (min-width: 560px) {
   .deck .card {
     width: 110px;
     height: 110px;
   }
 }
 
-@media only screen and (min-width: 720px) {
+@media only screen and (min-width: 680px) {
   .deck .card {
     width: 122px;
     height: 122px;
@@ -134,15 +135,15 @@ h1 {
 }
 
 .moves {
-  min-width: 60px;
+  min-width: 62px;
 }
 
 .timer {
-  min-width: 60px;
+  min-width: 62px;
 }
 
 .score-panel .stars {
-  min-width: 60px;
+  min-width: 62px;
   margin: 0;
   padding: 0;
   margin: 0 5px 0 0;
@@ -154,6 +155,5 @@ h1 {
 }
 
 .score-panel .restart {
-  min-width: 48px;
   cursor: pointer;
 }
