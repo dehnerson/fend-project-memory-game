@@ -1,5 +1,3 @@
-// TODO:add star rating logic; style winning modal; update README;
-
 // To enhance game with more cards just add icons to this array, per icon 2 cards will be added!
 const icons = ['diamond', 'anchor', 'bolt', 'bomb', 'leaf', 'bicycle', 'paper-plane-o', 'cube'];
 const cards = [];
@@ -123,9 +121,7 @@ function onCardOpened(cardElement) {
 
     incrementMoveCounter();
 
-    delayFunctionCall(function() {
-      cardPair[0].firstElementChild.className === cardPair[1].firstElementChild.className ? onCardsMatched() : onCardsNotMatched();
-    });
+    checkMatch(cardPair);
   }
   else {
     // There is no card to check for match, so just store it
@@ -133,6 +129,12 @@ function onCardOpened(cardElement) {
     newCardPair.push(cardElement);
     clickedCardElements.push(newCardPair);
   }
+}
+
+function checkMatch(cardPair) {
+  delayFunctionCall(function() {
+    cardPair[0].firstElementChild.className === cardPair[1].firstElementChild.className ? onCardsMatched() : onCardsNotMatched();
+  });
 }
 
 function onCardsMatched() {
