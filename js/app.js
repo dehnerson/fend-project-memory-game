@@ -36,6 +36,8 @@ function newGame() {
   matchCounter = 0;
   clickedCardElements = [];
 
+  showHiddenStars();
+
   let newDeckElement = document.createElement('ul');
   newDeckElement.className = 'deck';
 
@@ -186,6 +188,16 @@ function hideStar() {
   let star = document.querySelector('.stars li :not(.hidden)');
   if(star != null) {
     star.classList.add('hidden');
+  }
+}
+
+function showHiddenStars() {
+  let hiddenStars = document.querySelectorAll('.stars li .hidden');
+
+  if(hiddenStars != null) {
+    hiddenStars.forEach(function(each) {
+      each.classList.remove('hidden');
+    });
   }
 }
 
