@@ -1,3 +1,4 @@
 # How to contribute
 
-The files in this repository are used as the starting point for all students. Because we want students to write the majority of the code themselves, pull requests (most likely) will _not_ be merged into the project.
+This project started as a part of a [Udacity](https://udacity.com/) course, but it will be continued.
+Therefore, feel free to contribute any ideas for improvements. _I will be happy to check out your pull requestes!_
