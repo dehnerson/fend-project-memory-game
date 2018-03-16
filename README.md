@@ -1,10 +1,8 @@
 # Memory Game Project
 
-## Table of Contents
+## Introduction
 
-* [How to play](#how to play)
-* [Dependencies](#dependencies)
-* [Contributing](#contributing)
+This project formed out of the [Udacity](https://udacity.com/) [Front-End Web Developer Nanodegree Program](https://udacity.com/course/front-end-web-developer-nanodegree--nd001). It display the classic game "Memory".
 
 ## How to play
 
