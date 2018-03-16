@@ -2,19 +2,28 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
+* [How to play](#how to play)
+* [Dependencies](#dependencies)
 * [Contributing](#contributing)
 
-## Instructions
+## How to play
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+Once the page is loaded the game is ready to start. 16 face-down shuffled cards will be shown, each holding one of 8 symbols.
+The goal is to match pairs with the same symbol.
 
-To get started, open `js/app.js` and start building out the app's functionality
+Just by clicking a card, it will turn around and reveal it's symbol. After 2 cards are revealed they are checked for match.
+If the symbols match, they stay revealed, if not, the cards will be turned over again.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+Once all cards have been matched, the game is won.
+
+The amount of moves and the time needed to complete the game will be shown. Also, there is a star-rating rating the player's performance
+on how many moves were needed to win.
+
+## Dependencies
+
+[Font Awesome](https://fontawesome.com/)
+
 
 ## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
